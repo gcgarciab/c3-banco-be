@@ -20,3 +20,19 @@ class UserSerializer(serializers.ModelSerializer):
     Account.objects.create(user=userInstance, **account_data)
 
     return userInstance
+
+  def to_representation(self, instance):
+    user = User.objects.get(id=instance.id)
+    account = Account.objects.get(user=instance.id)
+    
+    return {
+      'id': user.id,
+      'username': user.username,
+      'name': user.name,
+      'email': user.email,
+      'account': {
+        'balance': account.balance,
+        'lastChangeDate': account.lastChangeDate,
+        'isActive': account.isActive,
+      }
+    }

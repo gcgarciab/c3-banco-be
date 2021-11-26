@@ -1,6 +1,7 @@
-import re
+
 from rest_framework import status, views
 from rest_framework.response import Response
+from authApp.models.user import User
 from authApp.serializers.userSerializer import UserSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
